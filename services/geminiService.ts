@@ -5,14 +5,19 @@ const MODEL_NAME = 'gemini-2.5-flash-image';
 
 export const generateImageWithNanoBanana = async (params: ImageGenerationParams): Promise<GenerationResult> => {
   try {
-    // Priority: Manual Key -> Environment Variable -> Error
-    const apiKey = params.apiKey || process.env.API_KEY;
-    
-    if (!apiKey) {
-        throw new Error("API Key is missing. Please enter your Gemini API Key in the settings.");
-    }
+// 🔑 로컬스토리지에서 API 키를 읽어오는 헬퍼 (파일 맨 위에 정의됨)
+const getApiKey = () => {
+  const key = localStorage.getItem("GEMINI_API_KEY");
+  if (!key) {
+    throw new Error("API Key is missing. Please enter your Gemini API Key in the settings.");
+  }
+  return key;
+};
 
-    const ai = new GoogleGenAI({ apiKey: apiKey });
+// 수정된 부분
+const apiKey = params.apiKey || getApiKey();  // 환경변수 대신 getApiKey() 사용
+const ai = new GoogleGenAI({ apiKey });
+  
 
     // Base Prompt Construction
     let finalPrompt = params.prompt;
