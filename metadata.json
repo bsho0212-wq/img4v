@@ -1,0 +1,5 @@
+{
+  "name": "IMG4V",
+  "description": "An AI-powered image generation and editing tool using the Nano Banana model. Customize camera angles, shot sizes, and perspectives to create the perfect composition.",
+  "requestFramePermissions": []
+}
