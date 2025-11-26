@@ -6,7 +6,7 @@ export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, '.', '');
 
   return {
-    base: "/img4v/", // GitHub Pages 배포용 base 설정
+    base: "/"
 
     server: {
       port: 3000,
@@ -14,11 +14,6 @@ export default defineConfig(({ mode }) => {
     },
 
     plugins: [react()],
-
-    define: {
-      'process.env.API_KEY': JSON.stringify(env.GEMINI_API_KEY),
-      'process.env.GEMINI_API_KEY': JSON.stringify(env.GEMINI_API_KEY),
-    },
 
     resolve: {
       alias: {
